@@ -1,0 +1,4 @@
+﻿  libump.c
+c:\users\y1417 simulation\desktop\sensapex-ump-sdk-master\libump.c(991): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     Creating library C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Debug\libump.lib and object C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Debug\libump.exp
+  libump.vcxproj -> C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Debug\libump.dll

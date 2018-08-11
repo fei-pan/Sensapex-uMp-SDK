@@ -1,0 +1,7 @@
+﻿  libump.c
+c:\users\y1417 simulation\desktop\sensapex-ump-sdk-master\libump.c(991): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     Creating library C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Release\libump.lib and object C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Release\libump.exp
+  Generating code
+  All 102 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  libump.vcxproj -> C:\Users\Y1417 Simulation\Desktop\Sensapex-uMp-SDK-master\x64\Release\libump.dll
