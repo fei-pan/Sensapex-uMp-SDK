@@ -30,8 +30,8 @@
 #  define _WINDOWS
 # endif
 #ifdef _WINDOWS
-#  include <winsock2.h>
-#  include <ws2tcpip.h>
+#  include <WinSock2.h>
+#  include <WS2tcpip.h>
 #pragma comment(lib, "Ws2_32.lib")
 #  include <stdint.h>  // for uint32_t
 #  define SOCKOPT_CAST (char *)             /**< cross platform trick, non-standard variable type requires typecasting in windows for socket options */
@@ -66,7 +66,7 @@ typedef struct sockaddr_in IPADDR;          /**< alias for sockaddr_in */
 #endif
 
 #ifdef _WINDOWS
-# include <windows.h>
+# include <Windows.h>
 //#ifndef LIBUMP_SHARED_DO_NOT_EXPORT
 //LIBUMP_SHARED_EXPORT HRESULT __stdcall DllRegisterServer(void);
 //LIBUMP_SHARED_EXPORT HRESULT __stdcall DllUnregisterServer(void);
@@ -1054,7 +1054,7 @@ public:
     /**
      * @brief Constructor
      */
-    LibUmp() {  _handle = NULL; }
+    LibUmp() {  _handle = nullptr; }
     /**
      * @brief Destructor
      */
@@ -1068,20 +1068,20 @@ public:
      * @return `true` if operation was successful, `false` otherwise
      */
     bool open(const char *broadcastAddress = LIBUMP_DEF_BCAST_ADDRESS, const unsigned int timeout = LIBUMP_DEF_TIMEOUT, const int group = LIBUMP_DEF_GROUP)
-    {	return (_handle = ump_open(broadcastAddress, timeout, group)) != NULL; }
+    {	return (_handle = ump_open(broadcastAddress, timeout, group)) != nullptr; }
 
     /**
      * @brief Check if socket is open for manipulator communication
      * @return `true` if this instance of `LibUmp` holds an open UDP socket.
      */
     bool isOpen()
-    { 	return _handle != NULL; }
+    { 	return _handle != nullptr; }
 
     /**
      * @brief Close the socket (if open) and free the state structure allocated in open
      */
     void close()
-    {	ump_close(_handle); _handle = NULL; }
+    {	ump_close(_handle); _handle = nullptr; }
 
     /**
      * @brief SDK library version
@@ -1125,7 +1125,7 @@ public:
      * @return `true` is `status` is an error status.
      */
     static bool errorStatus(ump_status status)
-    {	return	(int)status < 0; }
+    {	return	static_cast<int>(status) < 0; }
 
     /**
      * @brief Check if a status is a busy status
@@ -1162,7 +1162,7 @@ public:
      * @return `true` if operation was successful, `false` otherwise
      */
     bool cmd(const unsigned char cmd, const int argc = 0,
-             const int *argv = NULL,  const int dev = LIBUMP_USE_LAST_DEV)
+             const int *argv = nullptr,  const int dev = LIBUMP_USE_LAST_DEV)
     {	return	ump_cmd(_handle, getDev(dev), cmd, argc, argv) >= 0; }
 
     /**
@@ -1195,7 +1195,7 @@ public:
      * @return amount of data received, zero if none.
      */
     int cmd_resp(int *resp, int rsize,const int cmd, const int argc = 0,
-                 const int *argv = NULL,  const int dev = LIBUMP_USE_LAST_DEV)
+                 const int *argv = nullptr,  const int dev = LIBUMP_USE_LAST_DEV)
     {
         return ump_cmd_ext(_handle, getDev(dev), cmd, argc, argv, rsize, resp);
     }
@@ -1287,8 +1287,8 @@ public:
      */
     bool getPositions(int *x, int *y, int *z, int *w,
                       const int dev = LIBUMP_USE_LAST_DEV,
-                      const unsigned int timeLimit = LIBUMP_DEF_REFRESH_TIME)
-    {   return ump_get_positions_ext(_handle, getDev(dev), timeLimit, x, y, z, w, NULL) >= 0; }
+                      const int timeLimit = LIBUMP_DEF_REFRESH_TIME)
+    {   return ump_get_positions_ext(_handle, getDev(dev), timeLimit, x, y, z, w, nullptr) >= 0; }
 
     /**
      * @brief Store the current position
@@ -1395,15 +1395,32 @@ public:
 
        if ( ret >= 0 ) {
            if ( version[0] < 5) {
-               version_str[0] = version[0];
+               //version_str[0] = version[0];
+               version_str[0]=static_cast<char>(version[0]);
+
                version_str[1] = '.';
-               version_str[2] = version[1];
+               //version_str[2] = version[1];
+
+               version_str[2]=static_cast<char>(version[1]);
+
                version_str[3] = '.';
-               version_str[4] = version[2];
+
+               //version_str[4] = version[2];
+
+               version_str[4]=static_cast<char>(version[2]);
+
                version_str[5] = '.';
-               version_str[6] = version[3];
+
+               //version_str[6] = version[3];
+
+               version_str[6]=static_cast<char>(version[3]);
+
                version_str[7] = '.';
-               version_str[8] = version[4];
+
+               //version_str[8] = version[4];
+
+               version_str[8]=static_cast<char>(version[4]);
+
            }
         }
 
